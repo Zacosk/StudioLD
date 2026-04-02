@@ -19,13 +19,16 @@ This is Lexie Downie's portfolio website featuring:
 - **Tailwind CSS 4** for styling
 - **React Router 7** for navigation
 - **Lucide React** for icons
+- **js-yaml** for YAML parsing
 
 ## File Structure
 
 ```
 Frontend/
+├── public/
+│   └── assets/           # Project images (placed here, referenced with /assets/)
 ├── src/
-│   ├── assets/           # Images and static assets
+│   ├── assets/           # Legacy - use public/assets instead
 │   ├── components/
 │   │   ├── Navbar.tsx    # Top navigation bar
 │   │   └── ContactForm.tsx # Contact form component
@@ -33,7 +36,9 @@ Frontend/
 │   │   ├── Home.tsx      # Hero + project cards + contact
 │   │   ├── About.tsx     # Bio + portrait
 │   │   └── ProjectPage.tsx # Project detail view
-│   ├── projects.json     # Project data
+│   ├── projects.yaml     # Project data (YAML format)
+│   ├── types/
+│   │   └── yaml.d.ts     # Type declarations for YAML imports
 │   ├── App.tsx           # Router setup
 │   ├── main.tsx          # Entry point
 │   └── index.css         # Global styles + Tailwind
@@ -44,33 +49,34 @@ Frontend/
 ## Pages
 
 ### Home (`/`)
-- Hero section with full-width image and bouncing chevron
+- Hero section with full-width image and bouncing chevron (desktop only)
 - Click chevron to scroll to projects
-- Project grid: 2 columns, hover shows title + type subtitle
+- Project grid: 2 columns (1 on mobile), hover shows title + type subtitle
 - Contact section with "Create With Me!" heading and form
-- Left side: heading, subtitle, description text
-- Right side: contact form with First Name, Last Name, Email, Message fields
+- Mobile: reduced top padding, no chevron, hover overlay always visible
 
 ### About (`/about`)
-- Portrait image on left (2/5 width) - uses `/src/assets/LexieDownie.webp`
+- Portrait image on left (2/5 width) - uses `/public/assets/LexieDownie.webp`
 - Bio text on right (3/5 width)
 - "About Me" title same size as body text, bold
 - Text fills to match image height
 - Text is black, left-aligned
+- Contact form section below
 
 ### Project Page (`/project/:slug`)
 - Back navigation arrow
 - Project title + description header
-- Listing image
-- Bento-box grid of project images (first image larger 2x2, others fill around)
+- **Desktop**: Bento-box grid of project images with size options
+- **Mobile**: Single column stacked images with natural heights
+- Contact form section below
 
 ## Components
 
 ### Navbar
 - Fixed top, full-width
 - Left: "about" link to `/about`
-- Center: "STUDIO LD" link to home
-- Right: "in" link to `https://www.linkedin.com/in/lexie-downie-61468a257/`
+- Center: "STUDIO LD" perfectly centered
+- Right: "in" link to LinkedIn
 
 ### ContactForm
 - Name: First Name + Last Name side by side
@@ -82,26 +88,48 @@ Frontend/
 
 ## Data Structure
 
-### projects.json
-```json
-{
-  "slug": "string",
-  "title": "string",
-  "type": "string",
-  "listingimage": "string (path)",
-  "images": ["string (path)", ...]
-}
+### projects.yaml
+```yaml
+- slug: your-project-name
+  title: YOUR PROJECT TITLE
+  description: "Describe your project here."
+  type: BRANDING
+  listingimage: /assets/your-listing-image.png
+  images:
+    - src: /assets/project-image-1.png
+      size: large  # or normal, tall, thin, wide, extra_wide
+    - src: /assets/project-image-2.png
+      size: normal
 ```
+
+### Image Size Options
+| Size | colSpan | rowSpan | Description |
+|------|---------|---------|-------------|
+| `large` | 4 | 4 | Large square |
+| `normal` | 2 | 2 | Medium (default) |
+| `tall` | 4 | 2 | Wide and short |
+| `thin` | 1 | 2 | Narrow vertical |
+| `wide` | 3 | 2 | Medium wide |
+| `extra_wide` | 5 | 2 | Full width |
+
+> Note: Images without a size specified default to `normal` (2×2).
 
 ## Styling Conventions
 
 - Side padding: `px-6` mobile, `lg:px-20` desktop
 - Max content width: `xl:max-w-[1700px]`
-- Top padding: `pt-[300px]` for page content below fixed navbar
+- Top padding: `pt-32` mobile, `lg:pt-[300px]` desktop
 - Bottom padding: `pb-32` on main content
 - Text color: Black
 - No Tailwind dark mode in use
 - Hero image: `aspect-video`, max-width 4xl, centered
+- Mobile spacing: `mt-16` between sections
+- Desktop spacing: `mt-48` between sections
+
+## Animations
+
+- Chevron: Custom bounce-once animation (defined in `index.css`)
+- Project cards: Hover overlay transition
 
 ## Commands
 
@@ -110,5 +138,4 @@ npm install      # Install dependencies
 npm run dev      # Start dev server
 npm run build    # Build for production
 npm run preview  # Preview production build
-npm run lint     # Run ESLint
 ```

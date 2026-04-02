@@ -16,11 +16,11 @@ This project includes an `opencode.md` file that provides context about the proj
 
 You can use the `@` symbol to provide specific files or folders to the AI:
 
-- `@Frontend/src/projects.json` - Reference the projects data file
+- `@Frontend/src/projects.yaml` - Reference the projects data file
 - `@Frontend/src/pages/Home.tsx` - Reference the home page
 - `@Frontend/README.md` - Reference this README
 
-Example: "Add a new project using @Frontend/src/projects.json"
+Example: "Add a new project using @Frontend/src/projects.yaml"
 
 ### What You Can Ask Opencode To Do
 
@@ -33,38 +33,52 @@ Example: "Add a new project using @Frontend/src/projects.json"
 
 ## Adding Projects
 
-To add a new project, open the file `src/projects.json` in the `Frontend` folder.
+To add a new project, open the file `src/projects.yaml` in the `Frontend` folder.
 
 ### Project Structure
 
 Each project follows this format:
 
-```json
-{
-  "slug": "your-project-name",
-  "title": "YOUR PROJECT TITLE",
-  "description": "Describe your project here. This can be a longer paragraph.",
-  "type": "BRANDING",
-  "listingimage": "/assets/your-listing-image.png",
-  "images": [
-    "/assets/project-image-1.png",
-    "/assets/project-image-2.png"
-  ]
-}
+```yaml
+- slug: your-project-name
+  title: YOUR PROJECT TITLE
+  description: "Describe your project here. This can be a longer paragraph."
+  type: BRANDING
+  listingimage: /assets/your-listing-image.png
+  images:
+    - src: /assets/project-image-1.png
+      size: normal
+    - src: /assets/project-image-2.png
+      size: normal
 ```
+
+### Image Size Options
+
+When adding images, you can specify how much space they take up in the grid:
+
+| Size | Grid Space | Best For |
+|------|------------|----------|
+| `large` | 4×4 | Featured hero image |
+| `normal` | 2×2 | Standard image (default) |
+| `tall` | 4×2 | Wide images |
+| `thin` | 1×2 | Narrow vertical images |
+| `wide` | 3×2 | Medium wide images |
+| `extra_wide` | 5×2 | Full-width images |
+
+If you don't specify a size, it defaults to `normal` (2×2).
 
 ### Steps to Add a Project
 
-1. Open `src/projects.json`
-2. Copy an existing project entry (from `{` to `}`)
-3. Paste it at the end of the list, before the final `]`
+1. Open `src/projects.yaml`
+2. Copy an existing project entry (from `- slug:` to the next `- slug:` or end)
+3. Paste it at the end of the list
 4. Replace the values with your project details:
    - `slug`: A unique URL-friendly name (use hyphens, no spaces)
    - `title`: Your project title in CAPITALS
    - `description`: Your project description
    - `type`: Category in CAPITALS (e.g., BRANDING, UX/UI & BRANDING, BRANDING & WEB DESIGN)
    - `listingimage`: Path to your main project image
-   - `images`: Array of paths to additional project images
+   - `images`: Array of image objects with `src` and optional `size`
 
 ### Adding Images
 
@@ -76,12 +90,13 @@ Each project follows this format:
 - Use `/assets/` path (not `/src/assets/`) for images
 - Keep titles and types in CAPITALS
 - Each slug must be unique
+- The grid works on desktop - on mobile, images stack vertically automatically
 
 ## Available Scripts
 
 ```bash
 npm install      # Install dependencies
-npm run dev     # Start development server
-npm run build   # Build for production
-npm run preview # Preview production build
+npm run dev      # Start development server
+npm run build    # Build for production
+npm run preview  # Preview production build
 ```

@@ -58,13 +58,25 @@ export default function ProjectPage() {
                 <h1 className="text-base font-bold mb-2">{project.title}</h1>
                 <p className="text-base text-gray-600">{project.description}</p>
             </div>
-            <div className="grid grid-cols-5 gap-8 auto-rows-[250px]">
+            <div className="hidden lg:block">
+                <div className="grid grid-cols-5 gap-8 auto-rows-[250px]">
+                    {project.images.map((image, index) => (
+                        <img
+                            key={index}
+                            src={image.src}
+                            alt={`${project.title} - Image ${index + 1}`}
+                            className={`w-full h-full object-cover rounded-lg ${sizeClasses[image.size] || sizeClasses.default}`}
+                        />
+                    ))}
+                </div>
+            </div>
+            <div className="flex flex-col gap-8 lg:hidden">
                 {project.images.map((image, index) => (
                     <img
                         key={index}
                         src={image.src}
                         alt={`${project.title} - Image ${index + 1}`}
-                        className={`w-full h-full object-cover rounded-lg ${sizeClasses[image.size] || sizeClasses.default}`}
+                        className="w-full rounded-lg"
                     />
                 ))}
             </div>
