@@ -1,0 +1,51 @@
+- slug: muse-studios
+  title: MUSE STUDIOS
+  description: "Inspired by Muse Studios' philosophy of mindful movement, I developed a visual identity that reflects balance, energy and clarity. Muse's brand identity draws inspiration from the precision and flow of pilates practice, translating the studio's focus on strength, flexibility and mindful motion into clean and engaging visuals. I created a logo that captures the fluidity of movement, along with social media assets and a user-friendly app interface, ensuring the brand experience is consistent across both digital and physical touchpoints."
+  type: UX/UI & BRANDING
+  listingimage: /assets/portfolio.png
+  images:
+    - src: /assets/1.webp
+      size: wide
+    - src: /assets/1.webp
+      size: normal
+    - src: /assets/2.webp
+      size: normal
+    - src: /assets/2.webp
+      size: wide
+    - src: /assets/3.webp
+      size: wide
+    - src: /assets/3.webp
+      size: normal
+
+- slug: maintain-my-garden
+  title: MAINTAIN MY GARDEN
+  description: "Maintain My Garden is a landscaping and garden care company focused on creating and maintaining outdoor spaces with ease and professionalism. I developed a visual identity that reflects the brand's clean, approachable and nature-inspired ethos. This included designing a fresh logo, cohesive print materials and digital assets that highlight the company's commitment to simplicity and care. The result is a brand identity that feels modern and trustworthy while staying closely connected to the natural environments they work with."
+  type: BRANDING
+  listingimage: /assets/blog.png
+  images:
+    - src: /assets/blog.png
+      size: normal
+    - src: /assets/blog2.png
+      size: normal
+
+- slug: pace-retail-consulting
+  title: PACE RETAIL CONSULTING
+  description: "Pace Retail Consulting is a Sydney-based consultancy company that helps retail brands adapt to change, strengthen their strategy and connect more effectively with customers. With a focus on independence, innovation and personal service, they guide retailers through an industry that is fast-moving and highly competitive.\nI created a complete visual identity for Pace including their logo, website and social assets. The design reflects clarity and momentum, positioning the brand as a forward-thinking partner where retail meets strategy. My process involved exploring type and colour systems that felt bold yet professional, developing a logo that communicates movement and adaptability, and extending these elements into digital and social platforms to build a cohesive brand experience."
+  type: BRANDING & WEB DESIGN
+  listingimage: /assets/ecommerce.png
+  images:
+    - src: /assets/ecommerce.png
+      size: normal
+    - src: /assets/ecommerce2.png
+      size: normal
+
+- slug: human-synergistics
+  title: HUMAN SYNERGISTICS
+  description: "Human Synergistics is a global consultancy agency specialising in leadership development and organisational culture. As the graphic designer for their Australia and New Zealand branch, I created a wide range of print projects including flyers, booklets and large-format event banners, along with social media assets to support the brand. My focus was on designing clear, engaging materials that made complex ideas easy to understand and visually compelling, whether for workshops, conferences or digital campaigns."
+  type: BRANDING & WEB DESIGN
+  listingimage: /assets/ecommerce.png
+  images:
+    - src: /assets/ecommerce.png
+      size: normal
+    - src: /assets/ecommerce2.png
+      size: normal
