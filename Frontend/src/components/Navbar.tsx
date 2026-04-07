@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { assetPath } from '@/utils/assetPath';
 
 export default function Navbar() {
     return (
@@ -9,7 +10,7 @@ export default function Navbar() {
                 </Link>
                 <Link to="/" className="absolute left-1/2 -translate-x-1/2 hover:opacity-70 transition-opacity shrink-0">
                     <img 
-                        src="/public/assets/StudioLD.webp" 
+                        src={assetPath("/assets/StudioLD.webp")}
                         alt="Lexie Downie" 
                         className="h-16 object-contain"
                     />

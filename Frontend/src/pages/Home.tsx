@@ -3,6 +3,7 @@ import { ChevronDown } from "lucide-react";
 import yaml from "js-yaml";
 import projectsYaml from "../projects.yaml?raw";
 import ContactForm from "../components/ContactForm";
+import { assetPath } from '@/utils/assetPath';
 
 const projects = yaml.load(projectsYaml) as { slug: string; title: string; type: string; listingcardasset?: string }[];
 
@@ -15,8 +16,8 @@ export default function Home() {
         <main className="min-h-screen pt-32 pb-32 px-6 lg:px-20 lg:pt-[300px] xl:max-w-[1700px] xl:mx-auto flex flex-col items-center">
             <div className="w-full flex flex-col items-center">
                 <video autoPlay loop muted playsInline className="w-full rounded-lg mb-8">
-                    <source src="/assets/Home/HeroVideoMobile.mp4" media="(max-width: 1023px)" />
-                    <source src="/assets/Home/HeroVideo.mp4" />
+                    <source src={assetPath('/assets/Home/HeroVideoMobile.mp4')} media="(max-width: 1023px)" />
+                    <source src={assetPath('/assets/Home/HeroVideo.mp4')} />
                 </video>
                 <button onClick={scrollToProjects} className="cursor-pointer hidden lg:block">
                     <ChevronDown className="w-12 h-12" style={{ animation: 'bounce-once 1.5s ease-in-out 1' }} />
@@ -29,22 +30,14 @@ export default function Home() {
                         key={project.slug}
                         className="relative aspect-[16/9] rounded-lg overflow-hidden group"
                     >
-                        {project.listingcardasset?.endsWith(".mp4") ? (
-                            <video
-                                src={project.listingcardasset}
-                                autoPlay
-                                loop
-                                muted
-                                playsInline
-                                className="w-full h-full object-cover"
-                            />
-                        ) : (
-                            <img
-                                src={project.listingcardasset}
-                                alt={project.title}
-                                className="w-full h-full object-cover"
-                            />
-                        )}
+                        <video
+                            src={assetPath(project.listingcardasset ?? '/assets/placeholder.webp')}
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            className="w-full h-full object-cover"
+                        />
                         <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                             <div className="text-center">
                                 <h2 className="text-white text-xl font-bold">{project.title}</h2>

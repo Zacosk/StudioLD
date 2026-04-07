@@ -3,6 +3,7 @@ import { ArrowLeft } from "lucide-react";
 import yaml from "js-yaml";
 import projectsYaml from "../projects.yaml?raw";
 import ContactForm from "../components/ContactForm";
+import { assetPath } from '@/utils/assetPath';
 
 type ImageSize = "large" | "normal" | "tall" | "extra_tall" | "thin" | "wide" | "half_wide" | "extra_wide" | "full_wide";
 
@@ -15,7 +16,7 @@ const MediaRenderer = ({ src, className, alt }: { src: string; className?: strin
     if (src.endsWith(".mp4")) {
         return (
             <video
-                src={src}
+                src={assetPath(src)}
                 autoPlay
                 loop
                 muted
@@ -24,7 +25,7 @@ const MediaRenderer = ({ src, className, alt }: { src: string; className?: strin
             />
         );
     }
-    return <img src={src} alt={alt} className={className} />;
+    return <img src={assetPath(src)} alt={alt} className={className} />;
 };
 
 interface Project {

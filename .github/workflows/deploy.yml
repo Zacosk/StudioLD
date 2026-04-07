@@ -33,8 +33,8 @@ jobs:
         working-directory: ./Frontend
         run: |
           npm run build
-          # Fix YAML asset paths in JS files (Vite handles HTML paths)
-          sed -i 's|/assets/|/StudioLD/assets/|g' dist/assets/*.js
+          # Fix all asset paths to include base
+          find dist -type f \( -name "*.html" -o -name "*.js" \) -exec sed -i 's|/assets/|/StudioLD/assets/|g' {} \;
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
