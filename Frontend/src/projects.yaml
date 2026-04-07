@@ -17,9 +17,9 @@
     - src: /assets/Muse Studios/3.webp
       size: normal
     - src: /assets/Muse Studios/Muse4.mp4
-      size: half
+      size: half_wide
     - src: /assets/Muse Studios/Muse5.mp4
-      size: half
+      size: half_wide
 
 - slug: maintain-my-garden
   title: MAINTAIN MY GARDEN
