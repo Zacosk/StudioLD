@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import yaml from "js-yaml";
+import { useState } from "react";
 import projectsYaml from "../projects.yaml?raw";
 import ContactForm from "../components/ContactForm";
 import { assetPath } from '@/utils/assetPath';
@@ -13,6 +14,8 @@ interface ProjectImage {
 }
 
 const MediaRenderer = ({ src, className, alt }: { src: string; className?: string; alt: string }) => {
+    const [loaded, setLoaded] = useState(false);
+
     if (src.endsWith(".mp4")) {
         return (
             <video
@@ -21,11 +24,22 @@ const MediaRenderer = ({ src, className, alt }: { src: string; className?: strin
                 loop
                 muted
                 playsInline
-                className={className}
+                onLoadedData={() => setLoaded(true)}
+                className={`${className} ${loaded ? '' : 'hidden'}`}
             />
         );
     }
-    return <img src={assetPath(src)} alt={alt} className={className} />;
+    return (
+        <>
+            {!loaded && <div className={`bg-gray-200 animate-pulse rounded-lg ${className}`} />}
+            <img
+                src={assetPath(src)}
+                alt={alt}
+                onLoad={() => setLoaded(true)}
+                className={`${className} ${loaded ? '' : 'hidden'}`}
+            />
+        </>
+    );
 };
 
 interface Project {

@@ -7,7 +7,7 @@ export default function About() {
             <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 lg:items-stretch">
                 <div className="w-full lg:w-2/5">
                     <img 
-                        src={assetPath("/public/assets/LexieDownie.webp")}
+                        src={assetPath("/assets/LexieDownie.webp")}
                         alt="Lexie Downie" 
                         className="w-full aspect-square object-cover rounded-lg h-full"
                     />

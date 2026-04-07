@@ -14,7 +14,7 @@ export default function Home() {
 
     return (
         <main className="min-h-screen pt-32 pb-32 px-6 lg:px-20 lg:pt-[300px] xl:max-w-[1700px] xl:mx-auto flex flex-col items-center">
-            <div className="w-full flex flex-col items-center">
+            <div className="w-full flex flex-col items-center min-h-[300px] lg:min-h-[500px]">
                 <video autoPlay loop muted playsInline className="w-full rounded-lg mb-8">
                     <source src={assetPath('/assets/Home/HeroVideoMobile.mp4')} media="(max-width: 1023px)" />
                     <source src={assetPath('/assets/Home/HeroVideo.mp4')} />
