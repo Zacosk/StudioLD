@@ -31,9 +31,10 @@ jobs:
         run: npm ci
       - name: Build
         working-directory: ./Frontend
-        run: npm run build
-        env:
-          VITE_BASE_URL: /StudioLD/
+        run: |
+          npm run build
+          # Rewrite asset paths in built JS to include base path
+          sed -i 's|"/assets/|"/StudioLD/assets/|g' dist/assets/*.js
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
