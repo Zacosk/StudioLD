@@ -31,10 +31,7 @@ jobs:
         run: npm ci
       - name: Build
         working-directory: ./Frontend
-        run: |
-          npm run build
-          # Fix all asset paths to include base
-          find dist -type f \( -name "*.html" -o -name "*.js" \) -exec sed -i 's|/assets/|/StudioLD/assets/|g' {} \;
+        run: npm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
