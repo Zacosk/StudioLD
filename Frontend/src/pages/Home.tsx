@@ -4,7 +4,7 @@ import yaml from "js-yaml";
 import projectsYaml from "../projects.yaml?raw";
 import ContactForm from "../components/ContactForm";
 
-const projects = yaml.load(projectsYaml) as { slug: string; title: string; type: string }[];
+const projects = yaml.load(projectsYaml) as { slug: string; title: string; type: string; listingcardasset?: string }[];
 
 export default function Home() {
     const scrollToProjects = () => {
@@ -13,10 +13,11 @@ export default function Home() {
 
     return (
         <main className="min-h-screen pt-32 pb-32 px-6 lg:px-20 lg:pt-[300px] xl:max-w-[1700px] xl:mx-auto flex flex-col items-center">
-            <div className="w-full max-w-4xl flex flex-col items-center">
-                <div className="w-full aspect-video bg-gray-200 rounded-lg mb-8 animate-pulse flex items-center justify-center">
-                    <span className="text-gray-400">Image</span>
-                </div>
+            <div className="w-full flex flex-col items-center">
+                <video autoPlay loop muted playsInline className="w-full rounded-lg mb-8">
+                    <source src="/assets/Home/HeroVideoMobile.mp4" media="(max-width: 1023px)" />
+                    <source src="/assets/Home/HeroVideo.mp4" />
+                </video>
                 <button onClick={scrollToProjects} className="cursor-pointer hidden lg:block">
                     <ChevronDown className="w-12 h-12" style={{ animation: 'bounce-once 1.5s ease-in-out 1' }} />
                 </button>
@@ -28,9 +29,22 @@ export default function Home() {
                         key={project.slug}
                         className="relative aspect-[16/9] rounded-lg overflow-hidden group"
                     >
-                        <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
-                            <span className="text-gray-400">Image</span>
-                        </div>
+                        {project.listingcardasset?.endsWith(".mp4") ? (
+                            <video
+                                src={project.listingcardasset}
+                                autoPlay
+                                loop
+                                muted
+                                playsInline
+                                className="w-full h-full object-cover"
+                            />
+                        ) : (
+                            <img
+                                src={project.listingcardasset}
+                                alt={project.title}
+                                className="w-full h-full object-cover"
+                            />
+                        )}
                         <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                             <div className="text-center">
                                 <h2 className="text-white text-xl font-bold">{project.title}</h2>

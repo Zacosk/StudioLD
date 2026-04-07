@@ -4,12 +4,28 @@ import yaml from "js-yaml";
 import projectsYaml from "../projects.yaml?raw";
 import ContactForm from "../components/ContactForm";
 
-type ImageSize = "large" | "normal" | "tall" | "thin" | "wide" | "extra_wide";
+type ImageSize = "large" | "normal" | "tall" | "extra_tall" | "thin" | "wide" | "half_wide" | "extra_wide" | "full_wide";
 
 interface ProjectImage {
     src: string;
     size: ImageSize;
 }
+
+const MediaRenderer = ({ src, className, alt }: { src: string; className?: string; alt: string }) => {
+    if (src.endsWith(".mp4")) {
+        return (
+            <video
+                src={src}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className={className}
+            />
+        );
+    }
+    return <img src={src} alt={alt} className={className} />;
+};
 
 interface Project {
     slug: string;
@@ -22,14 +38,17 @@ interface Project {
 
 const projectsData = yaml.load(projectsYaml) as Project[];
 
-const sizeClasses: Record<ImageSize | "default", string> = {
-    default: "col-span-2 row-span-2",
-    large: "col-span-4 row-span-4 aspect-square",
-    normal: "col-span-2 row-span-2",
-    tall: "col-span-4 row-span-2",
-    thin: "col-span-1 row-span-2",
-    wide: "col-span-3 row-span-2",
-    extra_wide: "col-span-5 row-span-2",
+const sizeClasses10: Record<ImageSize | "default", string> = {
+    default: "col-span-4 row-span-2",
+    large: "col-span-8 row-span-4 aspect-square",
+    normal: "col-span-4 row-span-2",
+    tall: "col-span-4 row-span-4",
+    extra_tall: "col-span-4 row-span-6",
+    thin: "col-span-3 row-span-2",
+    wide: "col-span-6 row-span-2",
+    half_wide: "col-span-5 row-span-2",
+    extra_wide: "col-span-7 row-span-2",
+    full_wide: "col-span-10 row-span-2",
 };
 
 export default function ProjectPage() {
@@ -39,7 +58,7 @@ export default function ProjectPage() {
     if (!project) {
         return (
         <main className="min-h-screen pt-[300px] pb-32 px-6 lg:px-20 xl:max-w-[1700px] xl:mx-auto">
-                <Link to="/" className="flex items-center gap-2 text-black mb-8">
+<Link to="/" className="inline-flex items-center gap-2 text-black mb-8">
                     <ArrowLeft className="w-5 h-5" />
                     <span>Back</span>
                 </Link>
@@ -50,7 +69,7 @@ export default function ProjectPage() {
 
     return (
         <main className="min-h-screen pt-[300px] pb-32 px-6 lg:px-20 xl:max-w-[1700px] xl:mx-auto">
-            <Link to="/" className="flex items-center gap-2 text-black mb-8">
+                <Link to="/" className="inline-flex items-center gap-2 text-black mb-8">
                 <ArrowLeft className="w-5 h-5" />
                 <span>Back</span>
             </Link>
@@ -59,20 +78,20 @@ export default function ProjectPage() {
                 <p className="text-base text-gray-600">{project.description}</p>
             </div>
             <div className="hidden lg:block">
-                <div className="grid grid-cols-5 gap-8 auto-rows-[250px]">
+                <div className="grid grid-cols-10 gap-8 auto-rows-[250px]">
                     {project.images.map((image, index) => (
-                        <img
+                        <MediaRenderer
                             key={index}
                             src={image.src}
                             alt={`${project.title} - Image ${index + 1}`}
-                            className={`w-full h-full object-cover rounded-lg ${sizeClasses[image.size] || sizeClasses.default}`}
+                            className={`w-full h-full object-cover rounded-lg ${sizeClasses10[image.size] || sizeClasses10.default}`}
                         />
                     ))}
                 </div>
             </div>
             <div className="flex flex-col gap-8 lg:hidden">
                 {project.images.map((image, index) => (
-                    <img
+                    <MediaRenderer
                         key={index}
                         src={image.src}
                         alt={`${project.title} - Image ${index + 1}`}
