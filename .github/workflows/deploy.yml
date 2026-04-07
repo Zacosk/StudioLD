@@ -33,7 +33,7 @@ jobs:
         working-directory: ./Frontend
         run: npm run build
         env:
-          VITE_BASE_URL: /Portfolio/
+          VITE_BASE_URL: /StudioLD/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
