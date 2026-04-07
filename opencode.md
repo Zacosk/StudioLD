@@ -24,9 +24,12 @@ This is Lexie Downie's portfolio website featuring:
 ## File Structure
 
 ```
-Frontend/
+.github/
+└── workflows/
+    └── deploy.yml        # GitHub Pages deployment workflow
+Portfolio/
 ├── public/
-│   └── assets/           # Project images (placed here, referenced with /assets/)
+│   └── assets/           # Project images & videos (placed here, referenced with /assets/)
 ├── src/
 │   ├── assets/           # Legacy - use public/assets instead
 │   ├── components/
@@ -43,15 +46,17 @@ Frontend/
 │   ├── main.tsx          # Entry point
 │   └── index.css         # Global styles + Tailwind
 ├── package.json
+├── vite.config.ts
 └── index.html
 ```
 
 ## Pages
 
 ### Home (`/`)
-- Hero section with full-width image and bouncing chevron (desktop only)
+- Hero section with full-width video (desktop: HeroVideo.mp4, mobile: HeroVideoMobile.mp4)
 - Click chevron to scroll to projects
 - Project grid: 2 columns (1 on mobile), hover shows title + type subtitle
+- Supports MP4 videos as listing cards (auto-plays, loops, muted)
 - Contact section with "Create With Me!" heading and form
 - Mobile: reduced top padding, no chevron, hover overlay always visible
 
@@ -66,8 +71,9 @@ Frontend/
 ### Project Page (`/project/:slug`)
 - Back navigation arrow
 - Project title + description header
-- **Desktop**: Bento-box grid of project images with size options
+- **Desktop**: Bento-box grid (10 columns) of project images with size options
 - **Mobile**: Single column stacked images with natural heights
+- Supports MP4 videos as images (auto-plays, loops, muted)
 - Contact form section below
 
 ## Components
@@ -75,7 +81,7 @@ Frontend/
 ### Navbar
 - Fixed top, full-width
 - Left: "about" link to `/about`
-- Center: "STUDIO LD" perfectly centered
+- Center: "STUDIO LD" logo (absolute positioned, centered)
 - Right: "in" link to LinkedIn
 
 ### ContactForm
@@ -94,25 +100,27 @@ Frontend/
   title: YOUR PROJECT TITLE
   description: "Describe your project here."
   type: BRANDING
-  listingimage: /assets/your-listing-image.png
+  listingcardasset: /assets/listing-image.webp  # or .mp4 for video
   images:
-    - src: /assets/project-image-1.png
-      size: large  # or normal, tall, thin, wide, extra_wide
-    - src: /assets/project-image-2.png
+    - src: /assets/project-image-1.webp
+      size: large  # or normal, tall, thin, wide, extra_wide, half
+    - src: /assets/project-video.mp4
       size: normal
 ```
 
-### Image Size Options
+### Image Size Options (10-column grid)
 | Size | colSpan | rowSpan | Description |
 |------|---------|---------|-------------|
-| `large` | 4 | 4 | Large square |
-| `normal` | 2 | 2 | Medium (default) |
-| `tall` | 4 | 2 | Wide and short |
-| `thin` | 1 | 2 | Narrow vertical |
-| `wide` | 3 | 2 | Medium wide |
-| `extra_wide` | 5 | 2 | Full width |
+| `large` | 8 | 4 | Large square |
+| `normal` | 4 | 2 | Medium (default) |
+| `tall` | 8 | 2 | Wide and short |
+| `extra_tall` | 10 | 2 | Full width |
+| `thin` | 2 | 2 | Narrow vertical |
+| `wide` | 6 | 2 | Medium wide |
+| `extra_wide` | 10 | 2 | Full width |
+| `half` | 5 | 2 | Half width |
 
-> Note: Images without a size specified default to `normal` (2×2).
+> Note: Images without a size specified default to `normal` (4×2).
 
 ## Styling Conventions
 
@@ -130,6 +138,20 @@ Frontend/
 
 - Chevron: Custom bounce-once animation (defined in `index.css`)
 - Project cards: Hover overlay transition
+- Videos: Auto-play loops (muted for autoplay compatibility)
+
+## Deployment
+
+GitHub Actions workflow (`.github/workflows/deploy.yml`) deploys to GitHub Pages manually.
+
+**To deploy:**
+1. Go to repository Actions tab
+2. Select "Deploy to GitHub Pages" workflow
+3. Click "Run workflow"
+4. Site will be at `https://[username].github.io/Portfolio/`
+
+**Setup required:**
+- Repository Settings > Pages > Source: GitHub Actions
 
 ## Commands
 

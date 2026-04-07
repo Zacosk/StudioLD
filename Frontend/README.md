@@ -44,28 +44,44 @@ Each project follows this format:
   title: YOUR PROJECT TITLE
   description: "Describe your project here. This can be a longer paragraph."
   type: BRANDING
-  listingimage: /assets/your-listing-image.png
+  listingcardasset: /assets/your-listing-image.webp  # or .mp4 for video
   images:
-    - src: /assets/project-image-1.png
+    - src: /assets/project-image-1.webp
       size: normal
-    - src: /assets/project-image-2.png
+    - src: /assets/project-video.mp4
       size: normal
 ```
 
-### Image Size Options
+### Image Size Options (10-column grid)
 
 When adding images, you can specify how much space they take up in the grid:
 
 | Size | Grid Space | Best For |
 |------|------------|----------|
-| `large` | 4×4 | Featured hero image |
-| `normal` | 2×2 | Standard image (default) |
-| `tall` | 4×2 | Wide images |
-| `thin` | 1×2 | Narrow vertical images |
-| `wide` | 3×2 | Medium wide images |
-| `extra_wide` | 5×2 | Full-width images |
+| `large` | 8×4 | Featured hero image |
+| `normal` | 4×2 | Standard image (default) |
+| `tall` | 8×2 | Wide images |
+| `extra_tall` | 10×2 | Extra tall images |
+| `thin` | 2×2 | Narrow vertical images |
+| `wide` | 6×2 | Medium wide images |
+| `extra_wide` | 10×2 | Full-width images |
+| `half` | 5×2 | Half-width images |
 
-If you don't specify a size, it defaults to `normal` (2×2).
+If you don't specify a size, it defaults to `normal` (4×2).
+
+### Video Support
+
+Both listing cards and project images support MP4 videos:
+- Videos auto-play, loop, and are muted (required for autoplay)
+- Use `.mp4` extension for video files
+
+### Hero Video
+
+The homepage hero uses two video files:
+- Desktop: `Frontend/public/assets/Home/HeroVideo.mp4`
+- Mobile: `Frontend/public/assets/Home/HeroVideoMobile.mp4`
+
+Replace these files to update the hero video.
 
 ### Steps to Add a Project
 
@@ -77,20 +93,20 @@ If you don't specify a size, it defaults to `normal` (2×2).
    - `title`: Your project title in CAPITALS
    - `description`: Your project description
    - `type`: Category in CAPITALS (e.g., BRANDING, UX/UI & BRANDING, BRANDING & WEB DESIGN)
-   - `listingimage`: Path to your main project image
-   - `images`: Array of image objects with `src` and optional `size`
+   - `listingcardasset`: Path to your main project image or video
+   - `images`: Array of image/video objects with `src` and optional `size`
 
-### Adding Images
+### Adding Images & Videos
 
-1. Place your image files in the `Frontend/public/assets/` folder
-2. Reference them with `/assets/your-image-name.png`
+1. Place your files in the `Frontend/public/assets/` folder
+2. Reference them with `/assets/your-image-name.png` or `/assets/your-video.mp4`
 
 ### Important Notes
 
-- Use `/assets/` path (not `/src/assets/`) for images
+- Use `/assets/` path (not `/src/assets/`) for images/videos
 - Keep titles and types in CAPITALS
 - Each slug must be unique
-- The grid works on desktop - on mobile, images stack vertically automatically
+- The grid works on desktop - on mobile, images/videos stack vertically automatically
 
 ## Available Scripts
 
@@ -100,3 +116,14 @@ npm run dev      # Start development server
 npm run build    # Build for production
 npm run preview  # Preview production build
 ```
+
+## Deployment
+
+This project uses GitHub Actions for deployment to GitHub Pages. The workflow file is located at `.github/workflows/deploy.yml` in the repository root.
+
+**To deploy:**
+1. Go to repository Actions tab
+2. Select "Deploy to GitHub Pages" workflow
+3. Click "Run workflow"
+
+**Note:** Repository Settings > Pages > Source must be set to "GitHub Actions"
